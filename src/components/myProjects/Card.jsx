@@ -1,17 +1,20 @@
 import React from 'react';
 import Counter from './Counter';
 
-const Card = ({ title, infos, image, description, infoSup }) => {
+const Card = ({ title, infos, image, description, infoSup, idproject }) => {
   return (
-    <div>
-      <div> {title}</div>
+    <div id={idproject}>
+      <img src={image} alt="screenshot projet" />
       <div>
-        <p> {infos} </p>
-        <p> {description}</p>
-        <p>{infoSup}</p>
-      </div>
-      <div>
-        <Counter />
+        <div> {title}</div>
+        <div>
+          <p> {infos} </p>
+          <p> {description}</p>
+          <p>{infoSup}</p>
+        </div>
+        <div>
+          <Counter />
+        </div>
       </div>
     </div>
   );

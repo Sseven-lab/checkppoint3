@@ -11,11 +11,14 @@ const ManageProject = () => {
 
   const [deleteProjects, setDeleteProjects] = useState([]);
   const [loadingDelete, setLoadingDelete] = useState(true);
-
+  //const [selectedProjects, setSelectedProjects] = useState([]);
+  
   //GET PROJECTS
-  const getProject = async () => {
+  const getDeleteProject = async () => {
     try {
-      const dataDeleteProject = await axios.get('http://localhost:8000/api/project');
+      const dataDeleteProject = await axios.get(
+        'http://localhost:8000/api/project'
+      );
       setDeleteProjects(dataDeleteProject.data);
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -26,8 +29,8 @@ const ManageProject = () => {
   };
 
   useEffect(() => {
-    getProject();
-  }, [loadingDelete, deleteProjects ]);
+    getDeleteProject();
+  }, [loadingDelete, deleteProjects]);
   console.log('projects', deleteProjects);
 
   //POST NEW PROJECT
@@ -48,10 +51,18 @@ const ManageProject = () => {
     alert(`Le projet "${title}" a bien été ajouté`);
   };
 
+  //DELETE
+
+  const EraseProject = () => {
+    axios
+      .delete(`http://localhost:8000/api/project/${deleteProjects.idproject}`)
+      .then((res) => this.setState({ status: 'Projet supprimé' }));
+  };
+ 
 
   return (
     <div>
-      <Header/>
+      <Header />
       <div>Hello bonjour 3 </div>
       <form name="addProject" onSubmit={postNewProject}>
         <h1>Ajouter un projet</h1>
@@ -121,7 +132,7 @@ const ManageProject = () => {
           </li>
 
           <li id="creationButton">
-            <input
+            <button
               type="submit"
               id="addProjectButton"
               name="addProject"
@@ -136,17 +147,16 @@ const ManageProject = () => {
       <ul>
         <div>
           <li>
-            <label htmlfor="picture"></label>
-            <select
-              name="project"
-              id="project-select"
-              required
-            >
+            <label> Projet à supprimer</label>
+            <select name="project" id="project-select" required>
               <option value="" disabled selected>
-                Choose a challenge
+                Choisissez un projet
               </option>
               {deleteProjects.map((deleteProject) => (
-                <option key={deleteProject.idproject} value={deleteProject.idproject}>
+                <option
+                  key={deleteProject.idproject}
+                  value={deleteProject.idproject}
+                >
                   {deleteProject.title}
                 </option>
               ))}
@@ -154,12 +164,13 @@ const ManageProject = () => {
           </li>
         </div>
         <li id="deleteProject">
-          <input
+          <button
             type="submit"
             id="deleteProject"
             name="deleteProject"
             alt="deleteProject"
             value="Delete"
+            onClick={EraseProject}
           />
         </li>
       </ul>

@@ -57,6 +57,7 @@ const handleSearchProject =(e) => {
               image={project.image}
               description={project.description}
               infoSup={project.additional_info}
+              idproject={project.idproject}
             />
           ))}
       </div>

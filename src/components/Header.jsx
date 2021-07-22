@@ -32,7 +32,7 @@ export default class MenuExampleSecondaryPointing extends Component {
               name="manage"
               active={activeItem === 'manage'}
               onClick={this.handleItemClick}
-            />{' '}
+            />
           </Link>
         </Menu>
       </div>
