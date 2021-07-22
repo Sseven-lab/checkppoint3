@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Header from '../Header';
 
 const ManageProject = () => {
   const [title, setTitle] = useState('');
@@ -50,6 +51,7 @@ const ManageProject = () => {
 
   return (
     <div>
+      <Header/>
       <div>Hello bonjour 3 </div>
       <form name="addProject" onSubmit={postNewProject}>
         <h1>Ajouter un projet</h1>
@@ -136,12 +138,8 @@ const ManageProject = () => {
           <li>
             <label htmlfor="picture"></label>
             <select
-              name="circuit"
-              id="circuit-select"
-              // value={deleteProjects}
-              // onChange={(e) =>
-              //     setDeleteProjects(e.target.value)
-              // }
+              name="project"
+              id="project-select"
               required
             >
               <option value="" disabled selected>

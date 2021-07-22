@@ -1,45 +1,41 @@
-import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 export default class MenuExampleSecondaryPointing extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: 'home' };
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
 
     return (
       <div>
         <Menu pointing secondary>
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
+          <Link to="/">
             <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
+              name="home"
+              active={activeItem === 'home'}
               onClick={this.handleItemClick}
             />
-          </Menu.Menu>
+          </Link>
+          <Link to="/projects">
+            <Menu.Item
+              name="projects"
+              active={activeItem === 'projects'}
+              onClick={this.handleItemClick}
+            />
+          </Link>
+          <Link to="/admin/manage">
+            <Menu.Item
+              name="manage"
+              active={activeItem === 'manage'}
+              onClick={this.handleItemClick}
+            />{' '}
+          </Link>
         </Menu>
-
-        <Segment>
-          <img src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' alt=""/>
-        </Segment>
       </div>
-    )
+    );
   }
 }

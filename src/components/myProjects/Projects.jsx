@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
-//import { Link } from 'react-router-dom';
-//import Footer from '../Footer/Footer';
+import Header from '../Header';
 import axios from 'axios';
 import Card from './Card';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchProject, setSearchProject] = useState("");
 
   const getProject = async () => {
     try {
@@ -26,13 +25,32 @@ const Projects = () => {
   }, [loading]);
   console.log('projects', projects);
 
-  return (
+const handleSearchProject =(e) => {
+  let value = e.target.value;
+  setSearchProject(value)
+
+  // const filterProject = projects.filter((project) => project.description.includes(searchProject) && project.additional_info.includes(searchProject));
+  // setProjects(filterProject) ; 
+}
+
+  return !loading && (
     <div>
+              <Header/>
       <div>Projets</div>
+      <div>
+      <div>Chercher un projet</div> 
+      <input
+        value={searchProject}
+        type="text"
+        placeholder="Saisissez votre recherche"
+        onChange={handleSearchProject}
+      />   
+      </div>
 
       <div>
-        {!loading &&
-          projects.map((project) => (
+        {projects
+          .filter((project) => project.title.includes(searchProject) || project.description.includes(searchProject))
+          .map((project) => (
             <Card
               title={project.title}
               infos={project.infos}
